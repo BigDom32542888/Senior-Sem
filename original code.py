@@ -1,4 +1,7 @@
-N = input("Please pick an integer N to make a NxN Board:\n")
+N = input(int(("Please pick an integer N to make a N columns for Board:\n")))
+M = input(int(("Please pick an integer M to make M rows for Board:\n")))
+
+print("The Chess Board You Have Selected Is A", N,"x",M, "Board!")
 
 class NAdjustedKing:
 
