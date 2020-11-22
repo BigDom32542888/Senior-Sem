@@ -1,32 +1,95 @@
-import numpy as np
+# Python3 implementation of the  
+# above approach  
+ 
+# Function to print the output  
+def printTheArray(arr, n):
+   
+ 
+    for i in range(0, n):  
+        print(arr[i], end = " ")  
+     
+    print()
+### the "###" means it is not an original comment
+   
+# Function to generate all binary strings
+def checkBlock(block):
+    correctList=list()
+    isCorrect=True;
+    for i in range(len(block)-1):
+        if block[i]==1 and block[i+1]==1:
+            isCorrect=False;
+    if isCorrect==True:
+        return True
+### try making a list of them, initialize empty list
+blocks = list()
+def generateAllBinaryStrings(n, arr, i):
+   
+   
+ 
+    if i == n:
+        #printTheArray(arr, n)
+        ### try adding them to an array instead
+        piece=list()
+        for k in range(n):
+            piece.append(arr[k])
+        if checkBlock(piece):
+            blocks.append(piece)
+#        piece = arr
+       
+           
+#        blocks.append(piece)
+           
+        return
+       
+       
+     
+    # First assign "0" at ith position  
+    # and try for all other permutations  
+    # for remaining positions  
+    arr[i] = 0
+    generateAllBinaryStrings(n, arr, i + 1)  
+ 
+    # And then assign "1" at ith position  
+    # and try for all other permutations  
+    # for remaining positions  
+    arr[i] = 1
+    generateAllBinaryStrings(n, arr, i + 1)  
+ 
+# Driver Code
+if __name__ == "__main__":
+   n = 4
+   arr = [None] * n  
+ 
+    # Print all binary strings  
+   generateAllBinaryStrings(n, arr, 0)  
+ 
+# This code is contributed  
+# by Rituraj Jain
 
-N = input(int(("Please pick an integer N:\n")))
+### added by me
+print(blocks)
 
-Array1 = np.random.randint(0,2,(n,1))
-print(Array1)
 
-# Program to multiply two matrices using nested loops
 
-# 3x3 matrix
-X = [[12,7,3],
-    [4 ,5,6],
-    [7 ,8,9]]
-# 3x4 matrix
-Y = [[5,8,1,2],
-    [6,7,3,0],
-    [4,5,9,1]]
-# result is 3x4
-result = [[0,0,0,0],
-         [0,0,0,0],
-         [0,0,0,0]]
+def createMatrix(blocks):
+    columns= [len(blocks)*[0]]*len(blocks)
+    #columns=len(blocks)*rows
+    checkEdge(columns)
+    print(columns)
+   
 
-# iterate through rows of X
-for i in range(len(X)):
-   # iterate through columns of Y
-   for j in range(len(Y[0])):
-       # iterate through rows of Y
-       for k in range(len(Y)):
-           result[i][j] += X[i][k] * Y[k][j]
 
-for r in result:
-   print(r)
+def checkEdge(columns):
+    n=len(blocks)
+    edgesCount=0
+    for i in range(n):
+        for j in range(n):
+            isCompat = True
+            for k in range(4):
+                if blocks[i][k]==1 and blocks[j][k]==1:
+                   
+                    columns[i][j]=1
+                    columns[j][i]=1
+               
+               
+    return columns
